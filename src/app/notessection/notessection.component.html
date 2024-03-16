@@ -5,20 +5,18 @@
     </div>
     <div class="addnotes-boxes" *ngIf="ShowAddNote" (focusout)="onBlur()" #addNotes>
         <div class="addboxes">
-            <input type="text" name="title" class="title-box" placeholder="Title:" #titlebox> 
-            <!-- <input type="text" name="texts" class="texts" placeholder="Take a note..." #textsbox>  -->
+            <input type="text" name="title" class="title-box" placeholder="Title:" #titlebox>
             <textarea name="texts" class="texts" placeholder="Take a note..." #textsbox></textarea>
             <br>
         </div>
     </div>
     <div class="notes-boxes" #notesBoxes>
-        <div class="boxes" *ngFor="let i of note"> 
+        <div class="boxes" *ngFor="let i of note">
             <p>Title: {{i.title}}</p>
             <br>
-            <p>Text: </p> 
+            <p>Text: </p>
             <br>
-            <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span> 
-           
+            <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span>
         </div>
     </div>
-</div>  
+</div>

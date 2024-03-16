@@ -13,18 +13,20 @@ import { ConnectService, Notes } from '../Services/connect.service';
 })
 export class NotessectionComponent {
 
-  constructor(private s: ShareDataService, private conn : ConnectService) { }
+  constructor(private s: ShareDataService, private conn: ConnectService) { }
 
   isDark!: boolean;
   isOpened: boolean = true;
   ShowAddNote: boolean = false;
+  previousHeight: number = 0;
+  viewChecked: boolean = false;
 
   @ViewChild('titlebox') titleBox!: ElementRef;
   @ViewChild('textsbox') textsBox!: ElementRef;
   @ViewChild('notesBoxes') notesBoxes!: ElementRef;
-  n! :Notes;
+  n!: Notes;
 
-  note : Notes[] = [];
+  note: Notes[] = [];
 
   ngOnInit() {
     this.s.mode.subscribe(
@@ -46,6 +48,7 @@ export class NotessectionComponent {
     this.ShowAddNote = true;
     setTimeout(() => {
       this.titleBox.nativeElement.focus();
+      
     });
 
   }
@@ -58,7 +61,7 @@ export class NotessectionComponent {
 
 
       if (this.titleBox.nativeElement.value && this.textsBox.nativeElement.value) {
-        const newNote :Notes = {
+        const newNote: Notes = {
           _id: this.note.length + 1,
           title: this.titleBox.nativeElement.value,
           text: this.textsBox.nativeElement.value,
@@ -74,8 +77,7 @@ export class NotessectionComponent {
     }, 100);
   }
 
-  previousHeight: number = 0;
-  viewChecked: boolean = false;
+
 
   ngAfterViewChecked() {
     if (!this.viewChecked) {
@@ -88,7 +90,7 @@ export class NotessectionComponent {
     setTimeout(() => {
       const height = this.notesBoxes.nativeElement.clientHeight;
       if (height !== this.previousHeight) {
-        // console.log('Height of notes-boxes:', height);
+        console.log('Height of notes-boxes:', height);
         this.s.setComponentHeight(height);
         this.previousHeight = height;
       }
@@ -97,15 +99,15 @@ export class NotessectionComponent {
   }
 
 
-  getAllNoteFromAngular(){
+  getAllNoteFromAngular() {
     this.conn.getAllNotes().subscribe(
-      (value:Notes[]) => {
+      (value: Notes[]) => {
         this.note = value;
       }
     );
   }
 
-  saveNotesFromAngular(){
+  saveNotesFromAngular() {
     this.conn.saveNotes(this.n).subscribe();
   }
 

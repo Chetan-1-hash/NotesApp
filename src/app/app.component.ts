@@ -40,8 +40,15 @@ export class AppComponent implements OnInit{
 
   ngAfterViewChecked() {
     if (this.newHeight && this.maincontainer) {
-      if (this.newHeight > 416) {
-        this.renderer.setStyle(this.maincontainer.nativeElement, 'height', '150vh');
+      let htval = this.newHeight/416;
+      console.log(htval);
+      if (htval>1) {
+        let ht = 100;
+        for(let i = 2;i<=htval;i++){
+          ht+=55;
+        }
+        console.log(ht)
+        this.renderer.setStyle(this.maincontainer.nativeElement, 'height', (ht+'vh'));
       }
       else{
         this.renderer.setStyle(this.maincontainer.nativeElement, 'height', '100vh');
@@ -49,9 +56,5 @@ export class AppComponent implements OnInit{
     }
     this.newHeight = null;
   }
-
-  
-  
-
 
 }
