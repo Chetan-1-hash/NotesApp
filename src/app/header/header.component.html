@@ -1,0 +1,23 @@
+<div class="headbar" [ngClass]="{'dark-mode':isDark,'light-mode':!isDark}">
+    <nav>
+        <button class="faBar" (click)="showSideBar()" [style.background-color]="bgC">
+            <fa-icon [icon]="navBar"></fa-icon>
+        </button>
+        <span id="title">Notes-App</span>
+        <button class="btn-mode" (click)="setModeType()"
+            [ngClass]="{'dark-mode-btn':isDark, 'light-mode-btn':!isDark}">{{ModeType}}</button>
+    </nav>
+</div>
+<div class="sidebar" #sideNav [ngClass]="{'light-mode':!isDark}">
+    <nav>
+        <a routerLink="notes" routerLinkActive="active" (mouseenter)="showSideBar()" (mouseleave)="hideSideBar()">
+            <fa-icon [icon]="Bulb"></fa-icon> 
+            <span [hidden]="!isOpened"> Notes</span> </a>
+        <a routerLink="reminders" routerLinkActive="active" (mouseenter)="showSideBar()" (mouseleave)="hideSideBar()"> 
+            <fa-icon [icon]="Bell"></fa-icon>
+            <span [hidden]="!isOpened"> Reminders</span> </a>
+        <a routerLink="trash" routerLinkActive="active" (mouseenter)="showSideBar()" (mouseleave)="hideSideBar()"> 
+            <fa-icon [icon]="Trash"></fa-icon>
+            <span [hidden]="!isOpened"> Trash</span> </a>
+    </nav>
+</div>

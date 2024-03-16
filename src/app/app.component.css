@@ -1,0 +1,18 @@
+.main{
+    height: 100vh;
+    padding: 7px;
+}
+.header{
+    position:fixed;
+    z-index: 20;
+}
+
+.dark-mode{
+    /* height: auto; */
+    background-color: black;
+    color: white;
+}
+.light-mode{
+    background-color: white;
+    color: black;
+}

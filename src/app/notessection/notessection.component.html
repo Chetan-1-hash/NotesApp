@@ -1,0 +1,24 @@
+<div class="notes-container" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark, 
+'container-opened':isOpened, 'container-closed': !isOpened }">
+    <div class="searchbox" *ngIf="!ShowAddNote">
+        <input type="text" name="insert-note-box" placeholder="Take a note..." (click)="addNoteContainer()">
+    </div>
+    <div class="addnotes-boxes" *ngIf="ShowAddNote" (focusout)="onBlur()" #addNotes>
+        <div class="addboxes">
+            <input type="text" name="title" class="title-box" placeholder="Title:" #titlebox> 
+            <!-- <input type="text" name="texts" class="texts" placeholder="Take a note..." #textsbox>  -->
+            <textarea name="texts" class="texts" placeholder="Take a note..." #textsbox></textarea>
+            <br>
+        </div>
+    </div>
+    <div class="notes-boxes" #notesBoxes>
+        <div class="boxes" *ngFor="let i of note"> 
+            <p>Title: {{i.title}}</p>
+            <br>
+            <p>Text: </p> 
+            <br>
+            <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span> 
+           
+        </div>
+    </div>
+</div>  
