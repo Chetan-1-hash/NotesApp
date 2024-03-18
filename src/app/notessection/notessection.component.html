@@ -1,9 +1,11 @@
-<div class="notes-container" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark, 
-'container-opened':isOpened, 'container-closed': !isOpened }">
+<div class="notes-container" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark, 'container-opened':isOpened, 'container-closed': !isOpened }">
+
+    <!-- Add new note box -->
     <div class="searchbox" *ngIf="!ShowAddNote">
         <input type="text" name="insert-note-box" placeholder="Take a note..." (click)="addNoteContainer()">
     </div>
 
+    <!-- Add new note bootstrap modal  -->
     <div class="modal fade show" id="insertionModal" tabindex="-1" aria-labelledby="insertionModalLabel"
         aria-hidden="true" #insertionModal>
         <div class="modal-dialog modal-dialog-centered">
@@ -25,8 +27,9 @@
         </div>
     </div>
 
-    <div class="notes-boxes" #notesBoxes>
-        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i)" *ngFor="let i of note" #boxes (click)="selectBox(i._id)">
+    <!-- Note box -->
+    <div class="notes-boxes" #notesBoxes >
+        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i)" *ngFor="let i of note" #boxes (click)="selectBox(i._id)" [style.background-color]="note[i._id-1].boxColor">
             <p>Title: {{i.title}}</p>
 
             <p>Text: </p>
@@ -36,18 +39,18 @@
         </div>
     </div>
 
-    <!-- Color modal -->
+    <!-- Color changing bootstrap modal -->
     <div class="modal show" tabindex="-1" role="dialog" id="colorPickerModal" #colorPickerModal
         (focusout)="closechangeColor()">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" id="modal-colorpicker" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
                 <div class="modal-body" id="body-colorpickers">
                     <div class="colorpickers">
-                        <div class="color" id="black" style="background-color: black;" tabindex="0" (click)="selectColor('black')"></div>
+                        <div class="color" id="black" style="background-color: inherit;" tabindex="0" (click)="selectColor('inherit')"></div>
                         <div class="color" id="red" style="background-color: red;" (click)="selectColor('red')"></div>
                         <div class="color" id="green" style="background-color: green;" (click)="selectColor('green')"></div>
-                        <div class="color" id="blue" style="background-color: blue;" (click)="selectColor('blue')"></div>
-                        <div class="color" id="yellow" style="background-color: yellow;" (click)="selectColor('yellow')"></div>
+                        <div class="color" id="blue" style="background-color: purple;" (click)="selectColor('purple')"></div>
+                        <div class="color" id="yellow" style="background-color: violet;" (click)="selectColor('violet')"></div>
                     </div>
                 </div>
             </div>
@@ -55,22 +58,28 @@
     </div>
 
 
-    <!-- Modal -->
+    <!-- Update note data bootstrap modal -->
     <div class="modal fade show" id="updationModal" tabindex="-1" aria-labelledby="updationModalLabel"
         aria-hidden="true" #updationModal>
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
+            <div class="modal-content" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" #updationModalContent 
+            *ngIf="showNotes" 
+            [style.background-color]="note[showNotes._id-1].boxColor"
+            [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}">
                 <div class="modal-header" *ngIf="showNotes">
                     <label class="modal-title fs-5">Title:&nbsp;</label>
-                    <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" type="text" class="modal-title fs-5"
-                        id="updationModalInput" value="{{ showNotes.title}}" #uTitle>
+                    <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" 
+                    [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}"
+                    [style.background-color]="note[showNotes._id-1].boxColor" type="text" class="modal-title fs-5" id="updationModalInput" value="{{ showNotes.title}}" #uTitle  >
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"
                         #Crossbtn></button>
                 </div>
                 <div class="modal-body" *ngIf="showNotes">
-                    <textarea [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="updateText" id="updateText"
-                        cols="60" rows="10" #uText>{{ showNotes.text.join('\n') }}</textarea>
+                    <textarea  
+                    [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}"
+                    [style.background-color]="note[showNotes._id-1].boxColor" 
+                    [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="updateText" id="updateText"cols="60" rows="10" #uText>{{ showNotes.text.join('\n') }}</textarea>
                 </div>
                 <div class="modal-footer">
                     <div class="operation-btns">

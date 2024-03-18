@@ -24,16 +24,22 @@ export class ConnectService {
     return this.httpclient.delete("http://localhost:8080/deleteNote/"+id);
   }
 
+  selectBoxColor(id:number, color:string){
+    return this.httpclient.get("http://localhost:8080/setBoxColor/"+id+"/"+color);
+  }
+
 }
 
 export class Notes{
   _id:number;
   title:string;
   text:string[];
+  boxColor:string;
 
-  constructor(_id:number, title:string, text:string[]){
+  constructor(_id:number, title:string, text:string[], boxColor:string){
     this._id = _id;
     this.title = title;
     this.text = text;
+    this.boxColor = boxColor;
   }
 }
