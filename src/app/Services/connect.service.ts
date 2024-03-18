@@ -13,7 +13,15 @@ export class ConnectService {
   }
 
   saveNotes(n:Notes){
-    return this.httpclient.post<string>("http://localhost:8080/saveNotes",n);
+    return this.httpclient.post<string>("http://localhost:8080/saveNotes",n , {responseType: 'text' as 'json'});
+  }
+
+  updateNotes(id:number,n:Notes){
+    return this.httpclient.put("http://localhost:8080/updateNote/"+id,n);
+  }
+
+  deleteNote(id:number){
+    return this.httpclient.delete("http://localhost:8080/deleteNote/"+id);
   }
 
 }

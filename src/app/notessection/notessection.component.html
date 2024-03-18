@@ -3,20 +3,87 @@
     <div class="searchbox" *ngIf="!ShowAddNote">
         <input type="text" name="insert-note-box" placeholder="Take a note..." (click)="addNoteContainer()">
     </div>
-    <div class="addnotes-boxes" *ngIf="ShowAddNote" (focusout)="onBlur()" #addNotes>
-        <div class="addboxes">
-            <input type="text" name="title" class="title-box" placeholder="Title:" #titlebox>
-            <textarea name="texts" class="texts" placeholder="Take a note..." #textsbox></textarea>
-            <br>
+
+    <div class="modal fade show" id="insertionModal" tabindex="-1" aria-labelledby="insertionModalLabel"
+        aria-hidden="true" #insertionModal>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" (focusout)="onBlur()">
+
+                <div class="modal-header">
+                    <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" type="text" class="modal-title fs-5"
+                        id="insertionModalInput" placeholder="Title:" #insertionModalInput>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="onBlur()" #Crossbtn></button>
+                </div>
+
+                <div class="modal-body">
+                    <textarea [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="insertText"
+                        id="insertionText" placeholder="Take a note..." cols="60" rows="5" #insertionText></textarea>
+                </div>
+
+            </div>
         </div>
     </div>
+
     <div class="notes-boxes" #notesBoxes>
-        <div class="boxes" *ngFor="let i of note">
+        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i)" *ngFor="let i of note" #boxes (click)="selectBox(i._id)">
             <p>Title: {{i.title}}</p>
-            <br>
+
             <p>Text: </p>
-            <br>
-            <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span>
+            <div class="span-text">
+                <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span>
+            </div>
         </div>
     </div>
+
+    <!-- Color modal -->
+    <div class="modal show" tabindex="-1" role="dialog" id="colorPickerModal" #colorPickerModal
+        (focusout)="closechangeColor()">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" id="modal-colorpicker" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
+                <div class="modal-body" id="body-colorpickers">
+                    <div class="colorpickers">
+                        <div class="color" id="black" style="background-color: black;" tabindex="0" (click)="selectColor('black')"></div>
+                        <div class="color" id="red" style="background-color: red;" (click)="selectColor('red')"></div>
+                        <div class="color" id="green" style="background-color: green;" (click)="selectColor('green')"></div>
+                        <div class="color" id="blue" style="background-color: blue;" (click)="selectColor('blue')"></div>
+                        <div class="color" id="yellow" style="background-color: yellow;" (click)="selectColor('yellow')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade show" id="updationModal" tabindex="-1" aria-labelledby="updationModalLabel"
+        aria-hidden="true" #updationModal>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
+                <div class="modal-header" *ngIf="showNotes">
+                    <label class="modal-title fs-5">Title:&nbsp;</label>
+                    <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" type="text" class="modal-title fs-5"
+                        id="updationModalInput" value="{{ showNotes.title}}" #uTitle>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"
+                        #Crossbtn></button>
+                </div>
+                <div class="modal-body" *ngIf="showNotes">
+                    <textarea [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="updateText" id="updateText"
+                        cols="60" rows="10" #uText>{{ showNotes.text.join('\n') }}</textarea>
+                </div>
+                <div class="modal-footer">
+                    <div class="operation-btns">
+                        <button (click)="deleteNoteFromAngular(showNotes._id, $event)"><fa-icon [icon]="faDelete"></fa-icon></button>
+                        <button (click)="changeColor($event)" #colorButton><fa-icon [icon]="faColor"></fa-icon></button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="close()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="updateNoteFromAngular()">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
