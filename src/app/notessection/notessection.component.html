@@ -46,7 +46,7 @@
             <div class="modal-content" id="modal-colorpicker" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
                 <div class="modal-body" id="body-colorpickers">
                     <div class="colorpickers">
-                        <div class="color" id="black" style="background-color: inherit;" tabindex="0" (click)="selectColor('inherit')"></div>
+                        <div class="color" id="black" style="background-color: inherit;" tabindex="0" (click)="selectColor('inherit')"><fa-icon [icon]="faNoColor"></fa-icon></div>
                         <div class="color" id="red" style="background-color: red;" (click)="selectColor('red')"></div>
                         <div class="color" id="green" style="background-color: green;" (click)="selectColor('green')"></div>
                         <div class="color" id="blue" style="background-color: purple;" (click)="selectColor('purple')"></div>

@@ -148,6 +148,12 @@
     padding: 15px;
     margin: 0px 6px;
     cursor: pointer;
+    height: 20px;
+}
+.colorpickers .color fa-icon{
+    position: relative;
+    right: 0.6rem;
+    bottom: 0.7rem;
 }
 #colorPickerModal{
     position: fixed;

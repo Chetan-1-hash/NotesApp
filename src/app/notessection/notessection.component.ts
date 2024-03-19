@@ -4,7 +4,7 @@ import { ShareDataService } from '../Services/share-data.service';
 import { notes } from '../notessection/Notes-List/notelist';
 import { ConnectService, Notes } from '../Services/connect.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faDeleteLeft, faEdit, faPalette, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faDeleteLeft, faDropletSlash, faEdit, faPalette, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FormsModule } from '@angular/forms';
 
@@ -33,6 +33,7 @@ export class NotessectionComponent {
   faDelete = faTrashCan;
   faUpdate = faEdit
   faColor = faPalette;
+  faNoColor = faDropletSlash;
 
   @ViewChild('insertionModalInput', { static: false }) titleBox?: ElementRef;
   @ViewChild('insertionText', { static: false }) textsBox?: ElementRef;
@@ -95,7 +96,7 @@ export class NotessectionComponent {
           _id: this.note.length + 1,
           title: this.titleBox.nativeElement.value,
           text: newTextArray, // Save as array of strings
-          boxColor: this.selectedColor,
+          boxColor: "inherit",
         };
         this.n = newNote;
         console.log(this.n);
@@ -190,7 +191,7 @@ export class NotessectionComponent {
       _id: this.showNotes._id,
       title: this.uTitle.nativeElement.value,
       text: stext,
-      boxColor: this.selectedColor,
+      boxColor: this.showNotes.boxColor,
     };
     this.conn.updateNotes(updationNotes._id, updationNotes).subscribe(
       () => {
@@ -216,6 +217,7 @@ export class NotessectionComponent {
   deleteNoteFromAngular(id: number, event: MouseEvent) {
     this.conn.deleteNote(id).subscribe(
       () => {
+        this.close();
         this.getAllNoteFromAngular();
       }
     );
