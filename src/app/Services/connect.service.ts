@@ -28,9 +28,35 @@ export class ConnectService {
     return this.httpclient.get("http://localhost:8080/setBoxColor/"+id+"/"+color);
   }
 
+  saveDeletedNote(n:Notes){
+    return this.httpclient.post("http://localhost:8080/saveDeletedNote",n );
+  }
+
+  getDeletedNotes(){
+    return this.httpclient.get<DeletedNote[]>("http://localhost:8080/getDeletedNotes");
+  }
+
+  deleteTrashNote(id:number){
+    return this.httpclient.delete("http://localhost:8080/deleteTrashNote/"+id);
+  }
+
 }
 
 export class Notes{
+  _id:number;
+  title:string;
+  text:string[];
+  boxColor:string;
+
+  constructor(_id:number, title:string, text:string[], boxColor:string){
+    this._id = _id;
+    this.title = title;
+    this.text = text;
+    this.boxColor = boxColor;
+  }
+}
+
+export class DeletedNote{
   _id:number;
   title:string;
   text:string[];

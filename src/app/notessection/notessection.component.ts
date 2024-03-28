@@ -25,10 +25,11 @@ export class NotessectionComponent {
   previousHeight: number = 0;
   viewChecked: boolean = false;
   selectBoxIndex: number = 0;
-  selectedColor: string = "inherit";
+  selectedColor!: string;
   showNotes!: Notes;
   n!: Notes;
   note: Notes[] = [];
+  deletedNote: Notes[] = [];
 
   faDelete = faTrashCan;
   faUpdate = faEdit
@@ -86,12 +87,14 @@ export class NotessectionComponent {
   }
 
   onBlur() {
+
     setTimeout(() => {
-      const titleActive = this.titleBox?.nativeElement.contains(document.activeElement);
-      const textsActive = this.textsBox?.nativeElement.contains(document.activeElement);
+      let titleActive = this.titleBox?.nativeElement.contains(document.activeElement);
+      let textsActive = this.textsBox?.nativeElement.contains(document.activeElement);
+      let newTextArray = this.textsBox?.nativeElement.value.split('\n');
 
       if (this.titleBox?.nativeElement.value && this.textsBox?.nativeElement.value) {
-        const newTextArray = this.textsBox.nativeElement.value.split('\n'); // Split text by newline
+        // Split text by newline
         const newNote: Notes = {
           _id: this.note.length + 1,
           title: this.titleBox.nativeElement.value,
@@ -104,6 +107,12 @@ export class NotessectionComponent {
       }
 
       if (!titleActive && !textsActive) {
+        if (this.titleBox?.nativeElement) {
+          this.titleBox.nativeElement.value = '';
+        }
+        if (this.textsBox?.nativeElement) {
+          this.textsBox.nativeElement.value = '';
+        }
         (this.insertmodal?.nativeElement as HTMLElement).style.display = 'none';
         document.body.classList.remove('modal-open')
         this.ShowAddNote = false;
@@ -114,13 +123,8 @@ export class NotessectionComponent {
 
   saveNotesFromAngular() {
     this.conn.saveNotes(this.n).subscribe(
-      (response: string) => {
-        console.log(response);
-
+      () => {
         this.getAllNoteFromAngular();
-      },
-      (error) => {
-        console.error(error);
       }
     );
   }
@@ -206,23 +210,40 @@ export class NotessectionComponent {
   getAllNoteFromAngular() {
     this.conn.getAllNotes().subscribe(
       (value: Notes[]) => {
-        this.note = value;
-
+        this.note = value
+      },
+      (error) => {
+        console.log("error" + error);
       }
     );
   }
 
   //Operation-4 -> Delete a single note
 
-  deleteNoteFromAngular(id: number, event: MouseEvent) {
+  deleteNote(id: number, event: MouseEvent) {
     this.conn.deleteNote(id).subscribe(
       () => {
-        this.close();
+        for (let i = 0; i < this.note.length; i++) {
+          if (id === this.note[i]._id) {
+            const deletedItem = this.note.splice(i, 1)[0]; // Remove the item from this.note and get it
+            this.deletedNote.push(deletedItem);
+            this.saveDeletedNote(deletedItem);
+            break;
+          }
+        }
         this.getAllNoteFromAngular();
+        console.log(this.note);
+        this.s.setD_ID(id);
+        this.close();
       }
     );
 
+
     event.stopPropagation();
+  }
+
+  saveDeletedNote(n: Notes) {
+    this.conn.saveDeletedNote(n).subscribe();
   }
 
 }

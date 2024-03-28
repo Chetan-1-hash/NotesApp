@@ -27,4 +27,11 @@ export class ShareDataService {
     this.HeightValue.next(ht);
   }
 
+  private DeletedId = new BehaviorSubject<number>(0);
+  d_id = this.DeletedId.asObservable();
+  
+  setD_ID(id:number){
+    this.DeletedId.next(id);
+  }
+
 }

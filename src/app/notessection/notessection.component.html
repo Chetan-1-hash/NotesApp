@@ -29,7 +29,7 @@
 
     <!-- Note box -->
     <div class="notes-boxes" #notesBoxes >
-        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i)" *ngFor="let i of note" #boxes (click)="selectBox(i._id)" [style.background-color]="note[i._id-1].boxColor">
+        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i)" *ngFor="let i of note" #boxes (click)="selectBox(i._id)"  [style.background-color]="note[i._id-1].boxColor">
             <p>Title: {{i.title}}</p>
 
             <p>Text: </p>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="operation-btns">
-                        <button (click)="deleteNoteFromAngular(showNotes._id, $event)"><fa-icon [icon]="faDelete"></fa-icon></button>
+                        <button (click)="deleteNote(showNotes._id, $event)"><fa-icon [icon]="faDelete"></fa-icon></button>
                         <button (click)="changeColor($event)" #colorButton><fa-icon [icon]="faColor"></fa-icon></button>
                     </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"

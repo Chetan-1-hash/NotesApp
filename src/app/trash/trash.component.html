@@ -1,1 +1,23 @@
-<p>trash works!</p>
+<div class="notes-container" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark, 'container-opened':isOpened, 'container-closed': !isOpened }">
+    <!-- Search delete notes -->
+    <div class="searchbox" >
+        <input type="text" name="insert-note-box" placeholder="Search the note">
+    </div>
+
+    <!-- Note box -->
+    <div class="notes-boxes" #notesBoxes>
+        <div class="boxes" *ngFor="let i of deletednotes" #boxes [style.background-color]="i.boxColor">
+            <p>Title: {{i.title}}</p>
+
+            <p>Text: </p>
+            <div class="span-text">
+                <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span>
+            </div>
+            <div class="operation-btns">
+                <button (click)="deleteTrashNoteFromAngular(i._id)"><fa-icon [icon]="faDelete"></fa-icon></button>
+                <button (click)="RestoreNote(i)"><fa-icon [icon]="faRestore"></fa-icon></button>
+            </div>
+        </div>
+    </div>
+
+</div>

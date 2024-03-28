@@ -1,0 +1,100 @@
+.notes-container{
+    height: auto;
+    width: 80%;
+    position: absolute;
+    z-index:5;
+}
+.searchbox{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    position: relative;
+}
+.searchbox input[type="text"]{
+    background-color: inherit;
+    color: inherit;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 2px 0.2px 5px #6e6d6d;
+    border-radius: 3px;
+    padding: 8px;
+    width: 25rem;
+    font-size: 16px;
+    outline: none;
+}
+.searchbox input[type="text"]:focus{
+    transform: scale(1.05);
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.notes-boxes{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+.notes-boxes .boxes{
+    height: 25rem;
+    width: 18rem;
+    margin: 8px 15px;
+    border-radius: 6px;
+    box-shadow: 1px 0px 8px #6e6d6d;
+    padding: 15px;
+    cursor: pointer;
+}
+.notes-boxes .boxes .texts-content{
+    white-space: pre-line;
+}
+.notes-boxes .boxes .span-text{
+    height: 16rem;
+    display: block;
+    overflow: scroll;
+}
+.span-text::-webkit-scrollbar {
+    width: 10px;
+    background-color: inherit;
+}
+.span-text::-webkit-scrollbar-corner{
+    display: none;
+}
+.span-text::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+    background: #555; 
+}
+
+.operation-btns{
+    /* position: relative;
+    right: 14rem; */
+    height: 40px;
+}
+.operation-btns button{
+    background-color: inherit;
+    color: inherit;
+    outline: none;
+    border: none;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+.operation-btns button fa-icon{
+    font-size: 14px;
+    margin: 0px 2px;
+}
+.operation-btns button:hover{
+    background-color: #262525;
+    transform: scale(1.1);
+}
+
+.container-opened{
+    left: 18rem;
+    top: 4rem;
+}
+.container-closed{
+    width: 94%;
+    left: 5rem;
+    top: 4rem;
+}
+.dark-mode{
+    background-color: black;
+    color: white;
+}
+.light-mode{
+    background-color: white;
+    color: black;
+}
