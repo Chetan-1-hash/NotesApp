@@ -69,7 +69,6 @@ export class TrashComponent {
 
   RestoreNote(rN:Notes){
       this.conn.saveNotes(rN).subscribe();
-      // console.log(rN)
       this.deleteTrashNoteFromAngular(rN._id);
   }
 

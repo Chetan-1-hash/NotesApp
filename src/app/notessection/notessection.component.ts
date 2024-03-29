@@ -102,7 +102,6 @@ export class NotessectionComponent {
           boxColor: "inherit",
         };
         this.n = newNote;
-        console.log(this.n);
         this.saveNotesFromAngular();
       }
 
@@ -153,8 +152,10 @@ export class NotessectionComponent {
 
   open(uN: Notes) {
     this.showNotes = uN;
+    console.log(this.showNotes);
     (this.modal?.nativeElement as HTMLElement).style.display = 'block';
     document.body.classList.add('modal-open')
+    console.log((this.modal?.nativeElement as HTMLElement).style.display)
   }
 
   close() {
@@ -232,9 +233,10 @@ export class NotessectionComponent {
           }
         }
         this.getAllNoteFromAngular();
-        console.log(this.note);
         this.s.setD_ID(id);
         this.close();
+        console.log(this.note)
+        console.log(this.showNotes)
       }
     );
 

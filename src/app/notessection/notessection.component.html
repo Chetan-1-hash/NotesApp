@@ -28,8 +28,8 @@
     </div>
 
     <!-- Note box -->
-    <div class="notes-boxes" #notesBoxes >
-        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i)" *ngFor="let i of note" #boxes (click)="selectBox(i._id)"  [style.background-color]="note[i._id-1].boxColor">
+    <div class="notes-boxes" #notesBoxes>
+        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i); selectBox(i._id)" *ngFor="let i of note; let j=index" #boxes  [style.background-color]="note[j]?.boxColor">
             <p>Title: {{i.title}}</p>
 
             <p>Text: </p>
@@ -63,7 +63,7 @@
         aria-hidden="true" #updationModal>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" #updationModalContent 
-            *ngIf="showNotes" 
+            *ngIf="showNotes && note[showNotes._id - 1]"
             [style.background-color]="note[showNotes._id-1].boxColor"
             [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}">
                 <div class="modal-header" *ngIf="showNotes">
