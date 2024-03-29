@@ -13,27 +13,28 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent{
+export class HeaderComponent {
 
   Bulb = faLightbulb;
   Bell = faBell;
   Trash = faTrashCan;
   navBar = faBars;
 
-  constructor(private s : ShareDataService) {}
+  constructor(private s: ShareDataService) { }
 
-  isDark:boolean=true;
-  ModeType:string="Dark";
-  isOpened:boolean=false;
-  bgC!:string;
+  isDark: boolean = true;
+  ModeType: string = "Dark";
+  isPermanentlyOpen: boolean = false;
+  isOpened: boolean = false;
+  bgC!: string;
 
-  setModeType(){
+  setModeType() {
     this.isDark = !this.isDark;
     this.s.setMode(this.isDark);
-    if(this.isDark){
+    if (this.isDark) {
       this.ModeType = "Dark";
     }
-    else{
+    else {
       this.ModeType = "Light";
     }
   }
@@ -41,27 +42,44 @@ export class HeaderComponent{
 
   @ViewChild('sideNav') sideNav!: ElementRef;
   showSideBar(){
-    if(this.sideNav){
+    this.isPermanentlyOpen = !this.isPermanentlyOpen;
+    if (this.sideNav && this.isPermanentlyOpen) {
       this.sideNav.nativeElement.classList.toggle('open');
-    } 
-    this.isOpened = !this.isOpened;
-    this.s.setSectionLocation(this.isOpened);
-    if(this.isOpened){
-      this.bgC = '#e4e1e125';
+      this.s.setSectionLocation(this.isPermanentlyOpen);
+      this.isOpened = true;
     }
     else{
-      this.bgC = '';
+      this.sideNav.nativeElement.classList.remove('open');
+      this.s.setSectionLocation(this.isPermanentlyOpen);
+      this.isOpened = false;
+    }
+  }
+  showSideBarHover() {
+    if (!this.isPermanentlyOpen) {
+      if (this.sideNav) {
+        this.sideNav.nativeElement.classList.toggle('open');
+      }
+      this.isOpened = !this.isOpened;
+      this.s.setSectionLocation(this.isOpened);
+      if (this.isOpened) {
+        this.bgC = '#e4e1e125';
+      }
+      else {
+        this.bgC = '';
+      }
     }
   }
 
-  hideSideBar(){
-    this.isOpened = false;
-    this.s.setSectionLocation(this.isOpened);
-    this.bgC='';
-    if(this.sideNav){
-      this.sideNav.nativeElement.classList.remove('open');
-    } 
+  hideSideBarHover() {
+    if (!this.isPermanentlyOpen) {
+      this.isOpened = false;
+      this.s.setSectionLocation(this.isOpened);
+      this.bgC = '';
+      if (this.sideNav) {
+        this.sideNav.nativeElement.classList.remove('open');
+      }
+    }
   }
-    
-  
+
+
 }

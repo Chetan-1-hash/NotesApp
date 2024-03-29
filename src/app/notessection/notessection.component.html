@@ -29,7 +29,7 @@
 
     <!-- Note box -->
     <div class="notes-boxes" #notesBoxes>
-        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i); selectBox(i._id)" *ngFor="let i of note; let j=index" #boxes  [style.background-color]="note[j]?.boxColor">
+        <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i); selectBox(i._id)" *ngFor="let i of note; let j=index" #boxes  [style.background-color]="note[j].boxColor">
             <p>Title: {{i.title}}</p>
 
             <p>Text: </p>

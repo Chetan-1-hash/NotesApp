@@ -10,13 +10,13 @@
 </div>
 <div class="sidebar" #sideNav [ngClass]="{'light-mode':!isDark}">
     <nav>
-        <a routerLink="notes" routerLinkActive="active" (mouseenter)="showSideBar()" (mouseleave)="hideSideBar()">
+        <a routerLink="notes" routerLinkActive="active" (mouseenter)="showSideBarHover()" (mouseleave)="hideSideBarHover()">
             <fa-icon [icon]="Bulb"></fa-icon> 
             <span [hidden]="!isOpened"> Notes</span> </a>
-        <a routerLink="reminders" routerLinkActive="active" (mouseenter)="showSideBar()" (mouseleave)="hideSideBar()"> 
+        <a routerLink="reminders" routerLinkActive="active" (mouseenter)="showSideBarHover()" (mouseleave)="hideSideBarHover()"> 
             <fa-icon [icon]="Bell"></fa-icon>
             <span [hidden]="!isOpened"> Reminders</span> </a>
-        <a routerLink="trash" routerLinkActive="active" (mouseenter)="showSideBar()" (mouseleave)="hideSideBar()"> 
+        <a routerLink="trash" routerLinkActive="active" (mouseenter)="showSideBarHover()" (mouseleave)="hideSideBarHover()"> 
             <fa-icon [icon]="Trash"></fa-icon>
             <span [hidden]="!isOpened"> Trash</span> </a>
     </nav>
