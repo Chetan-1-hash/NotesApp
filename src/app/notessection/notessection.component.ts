@@ -96,9 +96,9 @@ export class NotessectionComponent {
       if (this.titleBox?.nativeElement.value && this.textsBox?.nativeElement.value) {
         // Split text by newline
         const newNote: Notes = {
-          _id: this.note.length + 1,
+          _id: this.note[this.note.length-1]._id + 1,
           title: this.titleBox.nativeElement.value,
-          text: newTextArray, // Save as array of strings
+          text: newTextArray, // Save as array of strings 
           boxColor: "inherit",
         };
         this.n = newNote;
@@ -179,8 +179,13 @@ export class NotessectionComponent {
 
   selectColor(color: string) {
     this.selectedColor = color;
+    this.showNotes.boxColor = color;
     if (this.selectBoxIndex !== null && this.uTitle && this.uText && this.boxes && this.updationModalContent) {
-      this.conn.selectBoxColor(this.selectBoxIndex, color).subscribe();
+      this.conn.selectBoxColor(this.selectBoxIndex, color).subscribe(
+        () => {
+          this.closechangeColor();
+        }
+      );
     }
   }
 

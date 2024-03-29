@@ -45,9 +45,6 @@ export class TrashComponent {
         this.isOpened = value;
       }
     );
-
-    
-
     this.getDeletedNote();
   }
 

@@ -40,8 +40,7 @@
     </div>
 
     <!-- Color changing bootstrap modal -->
-    <div class="modal show" tabindex="-1" role="dialog" id="colorPickerModal" #colorPickerModal
-        (focusout)="closechangeColor()">
+    <div class="modal show" tabindex="-1" role="dialog" id="colorPickerModal" #colorPickerModal>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" id="modal-colorpicker" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
                 <div class="modal-body" id="body-colorpickers">
@@ -63,22 +62,22 @@
         aria-hidden="true" #updationModal>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" #updationModalContent 
-            *ngIf="showNotes && note[showNotes._id - 1]"
-            [style.background-color]="note[showNotes._id-1].boxColor"
-            [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}">
+            *ngIf="showNotes"
+            [style.background-color]="showNotes.boxColor"
+            [ngStyle]="{'background-color': (showNotes.boxColor === 'inherit' && isDark) ? 'black' : (showNotes.boxColor === 'inherit' && !isDark) ? 'white' : showNotes.boxColor}">
                 <div class="modal-header" *ngIf="showNotes">
                     <label class="modal-title fs-5">Title:&nbsp;</label>
                     <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" 
-                    [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}"
-                    [style.background-color]="note[showNotes._id-1].boxColor" type="text" class="modal-title fs-5" id="updationModalInput" value="{{ showNotes.title}}" #uTitle  >
+                    [ngStyle]="{'background-color': (showNotes.boxColor === 'inherit' && isDark) ? 'black' : (showNotes.boxColor === 'inherit' && !isDark) ? 'white' : showNotes.boxColor}"
+                    [style.background-color]="showNotes.boxColor" type="text" class="modal-title fs-5" id="updationModalInput" value="{{ showNotes.title}}" #uTitle  >
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"
                         #Crossbtn></button>
                 </div>
                 <div class="modal-body" *ngIf="showNotes">
                     <textarea  
-                    [ngStyle]="{'background-color': (note[showNotes._id-1].boxColor === 'inherit' && isDark) ? 'black' : (note[showNotes._id-1].boxColor === 'inherit' && !isDark) ? 'white' : note[showNotes._id-1].boxColor}"
-                    [style.background-color]="note[showNotes._id-1].boxColor" 
+                    [ngStyle]="{'background-color': (showNotes.boxColor === 'inherit' && isDark) ? 'black' : (showNotes.boxColor === 'inherit' && !isDark) ? 'white' : showNotes.boxColor}"
+                    [style.background-color]="showNotes.boxColor" 
                     [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="updateText" id="updateText"cols="60" rows="10" #uText>{{ showNotes.text.join('\n') }}</textarea>
                 </div>
                 <div class="modal-footer">

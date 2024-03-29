@@ -1,0 +1,161 @@
+.remainder-container{
+    height: auto;
+    width: 80%;
+    position: absolute;
+    z-index:5;
+}
+.searchbox{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    position: relative;
+}
+.searchbox input[type="text"]{
+    background-color: inherit;
+    color: inherit;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 2px 0.2px 5px #6e6d6d;
+    border-radius: 3px;
+    padding: 8px;
+    width: 25rem;
+    font-size: 16px;
+    outline: none;
+}
+.searchbox input[type="text"]:focus{
+    transform: scale(1.05);
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.remainder-boxes{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+.remainder-boxes .boxes{
+    /* height: auto; */
+    width: 18rem;
+    margin: 8px 15px;
+    border-radius: 6px;
+    box-shadow: 1px 0px 8px #6e6d6d;
+    padding: 15px;
+    cursor: pointer;
+}
+.remainder-boxes .boxes .texts-content{
+    white-space: pre-line;
+}
+.remainder-boxes .boxes .span-text{
+    height: auto;
+    display: block;
+    overflow: scroll;
+}
+.span-text::-webkit-scrollbar, #updateText::-webkit-scrollbar {
+    width: 10px;
+    background-color: inherit;
+}
+.span-text::-webkit-scrollbar-corner, #updateText::-webkit-scrollbar-corner{
+    display: none;
+}
+.span-text::-webkit-scrollbar-thumb:hover, #updateText::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background: #555; 
+}
+.operation-btns{
+    position: relative;
+    right: 14rem;
+    height: 40px;
+}
+.operation-btns button{
+    background-color: inherit;
+    color: inherit;
+    outline: none;
+    border: none;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+.operation-btns button fa-icon{
+    font-size: 14px;
+    margin: 0px 2px;
+}
+.operation-btns button:hover{
+    background-color: #262525;
+    transform: scale(1.1);
+}
+.container-opened{
+    left: 18rem;
+    top: 4rem;
+}
+.container-closed{
+    width: 94%;
+    left: 5rem;
+    top: 4rem;
+}
+.dark-mode{
+    background-color: black;
+    color: white;
+}
+.light-mode{
+    background-color: white;
+    color: black;
+}
+.modal.fade.show {
+    background: linear-gradient(to bottom, rgba(85, 85, 85, 0.1), rgba(81, 79, 79, 0.399));
+}
+.modal-content, .btn-close{
+    box-shadow: 1px 0px 8px #6e6d6d;
+}
+#updationModalInput , #insertionModalInput{
+    border: none; 
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    width: 400px;
+    outline: none;
+    /* transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+}
+#updateText , #insertionText{
+    margin: 0px 6px; 
+    border: none;
+    outline: none;
+}
+#updationModal{
+    z-index: 50;
+}
+#body-colorpickers{
+    padding: 8px 2px;
+}
+.colorpickers{
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+}
+.colorpickers .color{
+    border: 1px solid #6e6d6d ;
+    border-radius: 50px;
+    width: 15px;
+    padding: 15px;
+    margin: 0px 6px;
+    cursor: pointer;
+    height: 20px;
+}
+.colorpickers .color fa-icon{
+    position: relative;
+    right: 0.6rem;
+    bottom: 0.7rem;
+}
+#colorPickerModal{
+    position: fixed;
+    top: 8rem;
+    left: 2.5rem;
+    z-index: 55;
+}
+#body-colorpickers{
+    background-color: inherit;
+}
+#modal-colorpicker{
+    width: 220px;
+}
+.btn.btn-primary{
+    background-color: violet;
+    outline: none;
+    border: none;
+}
+.modal-header, .modal-footer{
+    border: none;
+}
