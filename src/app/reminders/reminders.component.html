@@ -14,11 +14,12 @@
                 <div class="modal-header">
                     <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" type="text" class="modal-title fs-5"
                         id="insertionModalInput" placeholder="Title:" #insertionModalInput>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         (click)="onBlur()" #Crossbtn></button>
-                </div>
-
+                    </div>
+                    
                 <div class="modal-body">
+                    <label for="datetime">Timer:</label><input type="datetime-local" name="dt" id="datetime" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" #insertDateTime>
                     <textarea [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="insertText"
                         id="insertionText" placeholder="Set a Remainder..." cols="60" rows="5" #insertionText></textarea>
                 </div>
@@ -31,8 +32,8 @@
     <div class="remainder-boxes" #remainderBoxes>
         <div class="boxes" data-bs-toggle="modal" data-bs-target="#updationModal" (click)="open(i); selectBox(i._id)" *ngFor="let i of remainder; let j=index" #boxes  [style.background-color]="remainder[j].boxColor">
             <p>Title: {{i.title}}</p>
-
-            <p>Text: </p>
+            <label for="datetime" style="margin-bottom: 8px;">Timer: {{ i.date | date:'MMM dd, yyyy HH:mm':'UTC' }}</label>
+            <p style="margin-bottom: 0.2rem;">Text: </p>
             <div class="span-text">
                 <span class="texts-content" *ngFor="let text of i.text">{{ text }} <br> </span>
             </div>
@@ -40,8 +41,7 @@
     </div>
 
     <!-- Color changing bootstrap modal -->
-    <div class="modal show" tabindex="-1" role="dialog" id="colorPickerModal" #colorPickerModal
-        >
+    <div class="modal show" tabindex="-1" role="dialog" id="colorPickerModal" #colorPickerModal>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" id="modal-colorpicker" [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }">
                 <div class="modal-body" id="body-colorpickers">
@@ -71,13 +71,13 @@
                     <input [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" 
                     [ngStyle]="{'background-color': (showRemainder.boxColor === 'inherit' && isDark) ? 'black' : (showRemainder.boxColor === 'inherit' && !isDark) ? 'white' : showRemainder.boxColor}"
                     [style.background-color]="showRemainder.boxColor" type="text" class="modal-title fs-5" id="updationModalInput" value="{{ showRemainder.title}}" #uTitle  >
-
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()" #Crossbtn></button>
                 </div>
                 <div class="modal-body" *ngIf="showRemainder">
+                    <label for="datetime">Timer:</label><input type="datetime-local" name="dt" id="datetime" [value]="showRemainder.date"
+                    [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" [ngStyle]="{'background-color': (showRemainder.boxColor === 'inherit' && isDark) ? 'black' : (showRemainder.boxColor === 'inherit' && !isDark) ? 'white' : showRemainder.boxColor}" [style.background-color]="showRemainder.boxColor" #updateDateTime>
                     <textarea  
-                    [ngStyle]="{'background-color': (showRemainder.boxColor === 'inherit' && isDark) ? 'black' : (showRemainder.boxColor === 'inherit' && !isDark) ? 'white' : showRemainder.boxColor}"
-                    [style.background-color]="showRemainder.boxColor" 
+                    [ngStyle]="{'background-color': (showRemainder.boxColor === 'inherit' && isDark) ? 'black' : (showRemainder.boxColor === 'inherit' && !isDark) ? 'white' : showRemainder.boxColor}" [style.background-color]="showRemainder.boxColor" 
                     [ngClass]="{'dark-mode':isDark, 'light-mode':!isDark }" name="updateText" id="updateText"cols="60" rows="10" #uText>{{ showRemainder.text.join('\n') }}</textarea>
                 </div>
                 <div class="modal-footer">

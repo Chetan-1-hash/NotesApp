@@ -47,6 +47,9 @@
     display: block;
     overflow: scroll;
 }
+#datetime{
+    color-scheme: #555;
+}
 .span-text::-webkit-scrollbar, #updateText::-webkit-scrollbar {
     width: 10px;
     background-color: inherit;
@@ -92,8 +95,16 @@
     background-color: black;
     color: white;
 }
+.dark-mode::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+    color: white;
+}
 .light-mode{
     background-color: white;
+    color: black;
+}
+.light-mode::-webkit-calendar-picker-indicator{
+    filter: invert(0);
     color: black;
 }
 .modal.fade.show {
@@ -102,7 +113,7 @@
 .modal-content, .btn-close{
     box-shadow: 1px 0px 8px #6e6d6d;
 }
-#updationModalInput , #insertionModalInput{
+#updationModalInput , #insertionModalInput, #datetime{
     border: none; 
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     width: 400px;
@@ -156,6 +167,17 @@
     outline: none;
     border: none;
 }
+.modal-header{
+    padding-bottom: 8px;
+}
+.modal-body{
+    padding-top: 8px;
+}
 .modal-header, .modal-footer{
     border: none;
+}
+
+#datetime{
+    width: 10rem;
+    margin:8px 2rem;
 }

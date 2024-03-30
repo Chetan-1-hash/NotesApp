@@ -41,14 +41,14 @@ export class ConnectService {
   }
 
   getAllRemainder(){
-    return this.httpclient.get<Notes[]>("http://localhost:8080/getAllRemainder");
+    return this.httpclient.get<Remainder[]>("http://localhost:8080/getAllRemainder");
   }
 
-  saveRemainder(n:Notes){
+  saveRemainder(n:Remainder){
     return this.httpclient.post<string>("http://localhost:8080/saveRemainder",n , {responseType: 'text' as 'json'});
   }
 
-  updateRemainder(id:number,n:Notes){
+  updateRemainder(id:number,n:Remainder){
     return this.httpclient.put("http://localhost:8080/updateRemainder/"+id,n);
   }
 
@@ -58,6 +58,10 @@ export class ConnectService {
 
   selectRemainderBoxColor(id:number, color:string){
     return this.httpclient.get("http://localhost:8080/setRemainderBoxColor/"+id+"/"+color);
+  }
+
+  showNotificationRemainder(){
+    return this.httpclient.get<string[]>("http://localhost:8080/notify");
   }
 
 }
@@ -95,11 +99,13 @@ export class Remainder{
   title:string;
   text:string[];
   boxColor:string;
+  date:Date;
 
-  constructor(_id:number, title:string, text:string[], boxColor:string){
+  constructor(_id:number, title:string, text:string[], boxColor:string, date:Date){
     this._id = _id;
     this.title = title;
     this.text = text;
     this.boxColor = boxColor;
+    this.date = date;
   }
 }
