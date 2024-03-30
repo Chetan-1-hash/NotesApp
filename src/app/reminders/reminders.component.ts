@@ -213,7 +213,7 @@ export class RemindersComponent implements OnInit, AfterViewChecked {
       title: this.uTitle.nativeElement.value,
       text: stext,
       boxColor: this.showRemainder.boxColor,
-      date: udatetime,
+      date: new Date(udatetime),
     };
     this.conn.updateRemainder(updationRemainder._id, updationRemainder).subscribe(
       () => {
@@ -239,11 +239,26 @@ export class RemindersComponent implements OnInit, AfterViewChecked {
     );
   }
 
+  getFormattedDate(dateString: any): string {
+    if (typeof dateString === 'string') {
+      const date = new Date(dateString);
+      if (!isNaN(date.getTime())) {
+        return date.toISOString().slice(0, 16);
+      } else {
+        console.error("Invalid date format:", dateString);
+        return '';
+      }
+    } else {
+      console.error("Invalid date format:", dateString);
+      return '';
+    }
+  }
+  
+
   getNotification(){
     this.conn.showNotificationRemainder().subscribe(
       (value) => {
         this.notificationText = value;
-        console.log(this.notificationText);
       }
     );
   }
